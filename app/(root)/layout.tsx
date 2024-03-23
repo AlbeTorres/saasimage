@@ -1,7 +1,7 @@
 import MobileSidebar from '@/components/shared/MobileSidebar'
 import Sidebar from '@/components/shared/Sidebar'
 
-export const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main className='root'>
       <Sidebar />
