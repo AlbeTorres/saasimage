@@ -1,10 +1,11 @@
 /* eslint-disable camelcase */
-import { createUser, deleteUser, updateUser } from '@/lib/actions/user.actions'
-import { clerkClient } from '@clerk/nextjs'
 import { WebhookEvent } from '@clerk/nextjs/server'
 import { headers } from 'next/headers'
-import { NextResponse } from 'next/server'
 import { Webhook } from 'svix'
+
+import { createUser, deleteUser, updateUser } from '@/lib/actions/user.actions'
+import { clerkClient } from '@clerk/nextjs'
+import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
@@ -78,7 +79,12 @@ export async function POST(req: Request) {
       })
     }
 
-    return NextResponse.json({ message: 'OK', user: newUser })
+    console.log(`Webhook with and ID of ${id} and type of ${eventType}`)
+    console.log('Webhook body:', body)
+
+    return new Response('', { status: 200 })
+
+    // return NextResponse.json({ message: 'OK', user: newUser })
   }
 
   // UPDATE
