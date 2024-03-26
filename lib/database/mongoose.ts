@@ -23,5 +23,7 @@ export const connectToDatabase = async () => {
     mongoose.connect(MONGODE_URL, { dbName: 'smarteditfy', bufferCommands: false })
   cached.conn = await cached.promise
 
+  console.log('connection ok')
+
   return cached.conn
 }
