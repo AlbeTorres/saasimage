@@ -18,6 +18,16 @@ declare type UpdateUserParams = {
 }
 
 // ====== IMAGE PARAMS
+
+declare type CloudinaryImage = {
+  publicId: string
+  title: string
+  width: number
+  height: number
+  secureUrl: string
+  aspectRatio: string
+}
+
 declare type AddImageParams = {
   image: {
     title: string

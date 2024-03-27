@@ -11,12 +11,12 @@ const Sidebar = () => {
   const pathname = usePathname()
 
   return (
-    <aside className='hidden lg:block p-5 w-72 space-y-4'>
+    <aside className='hidden lg:block p-5 w-72'>
       <Link href={'/'}>
         <Image alt='logo' src={'/assets/images/logo-text.svg'} width={180} height={280} />
       </Link>
 
-      <nav className='!h-full sidebar-nav'>
+      <nav className='sidebar-nav'>
         <SignedIn>
           <ul className='sidebar-nav_elements'>
             {navLinks.slice(0, 6).map(link => {

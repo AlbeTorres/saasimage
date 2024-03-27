@@ -6,7 +6,7 @@ interface Author {
   lastName: string
 }
 
-interface IImage extends Document {
+export interface IImage extends Document {
   title: string
   transformationType: string
   publicId: string
@@ -18,7 +18,7 @@ interface IImage extends Document {
   aspectRatio?: string
   color?: string
   prompt?: string
-  author: Author
+  author: string
   createdAt?: Date
   updateAt?: Date
 }

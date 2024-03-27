@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { aspectRatioOptions, defaultValues, transformationTypes } from '@/constants'
+import { aspectRatioOptions, creditFee, defaultValues, transformationTypes } from '@/constants'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -15,8 +15,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { addImage } from '@/lib/actions/image.actions'
+import { updateCredits } from '@/lib/actions/user.actions'
 import { AspectRatioKey, debounce, deepMergeObjects } from '@/lib/utils'
+import { getCldImageUrl } from 'next-cloudinary'
+import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
+import MediaUploader from './MediaUploader'
+import TransformedImage from './TransformedImage'
 
 export const formSchema = z.object({
   title: z.string(),
@@ -34,12 +40,14 @@ const TransformationForm = ({
   creditBalance,
   config = null,
 }: TransformationFormProps) => {
-  const [image, setImage] = useState(data)
+  const [image, setImage] = useState<CloudinaryImage | null>(data)
   const [newTransformation, setNewTransformation] = useState<Transformations | null>(null)
-  const [isSubmitting, setNewSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [isTransforming, setIsTransforming] = useState(false)
   const [transformationConfig, setTransformationConfig] = useState(config)
   const [isPending, startTransition] = useTransition()
+
+  const router = useRouter()
 
   const transformationType = transformationTypes[type]
 
@@ -75,8 +83,50 @@ const TransformationForm = ({
   }
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
+    setIsSubmitting(true)
+
+    if (data || image) {
+      const transformationUrl = getCldImageUrl({
+        width: image?.width,
+        height: image?.height,
+        src: image!.publicId,
+        ...transformationConfig,
+      })
+
+      const imageData = {
+        title: values.title,
+        publicId: image!.publicId,
+        transformationType: type,
+        width: image!.width,
+        height: image!.height,
+        config: transformationConfig,
+        secureURL: image!.secureUrl,
+        transformationURL: transformationUrl,
+        aspectRatio: values.aspectRatio,
+        prompt: values.prompt,
+        color: values.color,
+      }
+
+      if (action === 'Add') {
+        try {
+          const newImage = await addImage({
+            image: imageData,
+            userId,
+            path: '/',
+          })
+
+          if (newImage) {
+            form.reset()
+            setImage(data)
+            router.push(`/transformations/${newImage._id}`)
+          }
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    }
   }
 
   const onInputChangeHandler = (
@@ -100,7 +150,9 @@ const TransformationForm = ({
     setTransformationConfig(deepMergeObjects(newTransformation, transformationConfig))
     setNewTransformation(null)
 
-    startTransition(async () => {})
+    startTransition(async () => {
+      await updateCredits(userId, creditFee)
+    })
   }
   return (
     <Form {...form}>
@@ -173,6 +225,34 @@ const TransformationForm = ({
             />
           </div>
         )}
+
+        <div className='media-uploader-field'>
+          <CustomField
+            control={form.control}
+            name='publicId'
+            className='flex size-full flex-col'
+            render={({ field }) => (
+              <MediaUploader
+                image={image}
+                setImage={setImage}
+                publicId={field.value}
+                onValueChange={field.onChange}
+                type={type}
+              />
+            )}
+          />
+
+          <TransformedImage
+            image={image}
+            type={type}
+            title={form.getValues('title')}
+            isTransforming={isTransforming}
+            setIsTransforming={setIsTransforming}
+            transformationConfig={transformationConfig}
+            hasDownload={false}
+          />
+        </div>
+
         <div className='flex flex-col lg:flex-row gap-4 w-full justify-end'>
           <Button
             onClick={onTransformHandler}
