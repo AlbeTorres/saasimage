@@ -21,7 +21,7 @@ const MediaUploader = ({ onValueChange, setImage, image, publicId, type }: Media
       ...prevState,
       publicId: result?.info?.public_id,
       width: result?.info?.width,
-      heigth: result?.info?.heigth,
+      height: result?.info?.height,
       secureURL: result?.info?.secure_url,
     }))
 

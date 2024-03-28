@@ -26,11 +26,15 @@ import MediaUploader from './MediaUploader'
 import TransformedImage from './TransformedImage'
 
 export const formSchema = z.object({
-  title: z.string(),
+  title: z
+    .string({
+      required_error: 'This field is required.',
+    })
+    .min(1, { message: 'This field is required' }),
   aspectRatio: z.string().optional(),
   color: z.string().optional(),
   prompt: z.string().optional(),
-  publicId: z.string(),
+  publicId: z.string().min(1, { message: 'This field is required' }),
 })
 
 const TransformationForm = ({
@@ -87,6 +91,8 @@ const TransformationForm = ({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true)
 
+    console.log(values)
+
     if (data || image) {
       const transformationUrl = getCldImageUrl({
         width: image?.width,
@@ -141,9 +147,12 @@ const TransformationForm = ({
           if (updatedImage) {
             router.push(`/transformations/${updatedImage._id}`)
           }
-        } catch (error) {}
+        } catch (error) {
+          console.log(error)
+        }
       }
     }
+    setIsSubmitting(false)
   }
 
   const onInputChangeHandler = (
@@ -287,7 +296,11 @@ const TransformationForm = ({
           >
             {isTransforming ? 'Transforming...' : 'Apply Transformation'}
           </Button>
-          <Button disabled={isSubmitting} className='submit-button capitalize' type='submit'>
+          <Button
+            disabled={isSubmitting || transformationConfig === null}
+            className='submit-button capitalize'
+            type='submit'
+          >
             {isSubmitting ? 'Submitting...' : 'Save Image'}
           </Button>
         </div>
