@@ -12,7 +12,7 @@ const MobileSidebar = () => {
   return (
     <header className='header'>
       <Link className='flex items-center gap-2 md:py-2' href={''}>
-        <Image src={'/assets/images/logo-text.svg'} alt='logo' width={180} height={280} />
+        <Image priority src={'/assets/images/logo-text.svg'} alt='logo' width={180} height={280} />
       </Link>
       <nav className='flex gap-2'>
         <SignedIn>

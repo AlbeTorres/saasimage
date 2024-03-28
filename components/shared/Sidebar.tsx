@@ -13,7 +13,7 @@ const Sidebar = () => {
   return (
     <aside className='hidden lg:block p-5 w-72'>
       <Link href={'/'}>
-        <Image alt='logo' src={'/assets/images/logo-text.svg'} width={180} height={280} />
+        <Image alt='logo' priority src={'/assets/images/logo-text.svg'} width={180} height={280} />
       </Link>
 
       <nav className='sidebar-nav'>

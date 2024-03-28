@@ -1,14 +1,14 @@
 import { Document, Schema, model, models } from 'mongoose'
 
-interface IUser extends Document {
+export interface IUser extends Document {
   clerkId: string
   email: string
   username: string
-  photo: URL
+  photo: string
   firstName: string
   lastName: string
   planId: string
-  creditBalance: string
+  creditBalance: number
 }
 
 const UserSchema = new Schema({
@@ -19,7 +19,7 @@ const UserSchema = new Schema({
   firstName: { type: String },
   lastName: { type: String },
   planId: { type: String },
-  creditBalance: { type: Number },
+  creditBalance: { type: Number, default: 10 },
 })
 
 const User = models?.User || model('User', UserSchema)

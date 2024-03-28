@@ -24,7 +24,7 @@ declare type CloudinaryImage = {
   title: string
   width: number
   height: number
-  secureUrl: string
+  secureURL: string
   aspectRatio: string
 }
 

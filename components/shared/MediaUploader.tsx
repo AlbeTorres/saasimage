@@ -22,7 +22,7 @@ const MediaUploader = ({ onValueChange, setImage, image, publicId, type }: Media
       publicId: result?.info?.public_id,
       width: result?.info?.width,
       heigth: result?.info?.heigth,
-      secureUrl: result?.info?.secure_url,
+      secureURL: result?.info?.secure_url,
     }))
 
     onValueChange(result?.info?.public_id)

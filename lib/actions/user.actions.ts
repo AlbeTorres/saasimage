@@ -1,6 +1,6 @@
 'use server'
 
-import User from '@/lib/database/models/user.model'
+import User, { IUser } from '@/lib/database/models/user.model'
 import { connectToDatabase } from '@/lib/database/mongoose'
 import { handleError } from '@/lib/utils'
 import { revalidatePath } from 'next/cache'
@@ -19,11 +19,11 @@ export async function createUser(user: CreateUserParams) {
 }
 
 // READ
-export async function getUserById(userId: string) {
+export async function getUserById(userId: string): Promise<IUser | undefined> {
   try {
     await connectToDatabase()
 
-    const user = await User.findOne({ clerkId: userId })
+    const user = await User.findOne<IUser>({ clerkId: userId })
 
     if (!user) throw new Error('User not found')
 
@@ -38,7 +38,7 @@ export async function updateUser(clerkId: string, user: UpdateUserParams) {
   try {
     await connectToDatabase()
 
-    const updatedUser = await User.findOneAndUpdate({ clerkId }, user, {
+    const updatedUser = await User.findOneAndUpdate<IUser>({ clerkId }, user, {
       new: true,
     })
 
