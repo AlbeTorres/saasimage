@@ -13,7 +13,7 @@ const populateUser = (query: any) =>
   query.populate({
     path: 'author',
     model: 'User',
-    select: '_id firstName lastName',
+    select: '_id firstName lastName clerkId',
   })
 
 // Add Image
@@ -22,7 +22,6 @@ export async function addImage({ image, userId, path }: AddImageParams) {
     await connectToDatabase()
 
     const author = await User.findById(userId)
-    console.log(author)
 
     if (!author) {
       throw new Error('User not found')
@@ -46,12 +45,12 @@ export async function updateImage({ image, userId, path }: UpdateImageParams) {
     await connectToDatabase()
 
     const imageToUpdate = await Image.findById<IImage>(image._id)
-    console.log(imageToUpdate)
-    if (!imageToUpdate || imageToUpdate.author !== userId) {
+
+    if (!imageToUpdate || imageToUpdate.author.toHexString() !== userId) {
       throw new Error('Unautorized or Image not found')
     }
 
-    const updateImage = await Image.findByIdAndUpdate(imageToUpdate._id, image, { new: true })
+    const updateImage = await Image.findByIdAndUpdate(image._id, image, { new: true })
 
     revalidatePath(path)
     return JSON.parse(JSON.stringify(updateImage))

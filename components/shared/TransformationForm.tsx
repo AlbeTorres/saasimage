@@ -56,6 +56,17 @@ const TransformationForm = ({
 
   const transformationType = transformationTypes[type]
 
+  let showTransformationButton = false
+
+  if (action === 'Add') {
+    showTransformationButton = true
+  } else if (
+    transformationType.type !== 'removeBackground' &&
+    transformationType.type !== 'restore'
+  ) {
+    showTransformationButton = true
+  }
+
   const initialValues =
     data && action === 'Update'
       ? {
@@ -77,7 +88,7 @@ const TransformationForm = ({
 
     setImage((prevState: any) => ({
       ...prevState,
-      aspectRation: imageSize.aspectRatio,
+      aspectRatio: imageSize.aspectRatio,
       width: imageSize.width,
       height: imageSize.height,
     }))
@@ -90,8 +101,6 @@ const TransformationForm = ({
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true)
-
-    console.log(values)
 
     if (data || image) {
       const transformationUrl = getCldImageUrl({
@@ -166,8 +175,8 @@ const TransformationForm = ({
         ...prevState,
         [type]: { ...prevState?.[type], [fieldName === 'prompt' ? 'prompt' : 'to']: value },
       }))
-      onChangeField(value)
-    }, 1000)
+    }, 1000)()
+    return onChangeField(value)
   }
 
   //Todo
@@ -205,7 +214,10 @@ const TransformationForm = ({
             formLabel='Aspect Ratio'
             className='w-full'
             render={({ field }) => (
-              <Select onValueChange={value => onSelectFieldHandler(value, field.onChange)}>
+              <Select
+                onValueChange={value => onSelectFieldHandler(value, field.onChange)}
+                value={field.value}
+              >
                 <SelectTrigger className='select-field'>
                   <SelectValue placeholder='Select size' />
                 </SelectTrigger>
@@ -290,12 +302,13 @@ const TransformationForm = ({
         <div className='flex flex-col lg:flex-row gap-4 w-full justify-end'>
           <Button
             onClick={onTransformHandler}
-            disabled={isTransforming || newTransformation === null}
+            disabled={isTransforming || newTransformation === null || !showTransformationButton}
             className='submit-button capitalize'
             type='button'
           >
             {isTransforming ? 'Transforming...' : 'Apply Transformation'}
           </Button>
+
           <Button
             disabled={isSubmitting || transformationConfig === null}
             className='submit-button capitalize'

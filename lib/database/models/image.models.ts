@@ -18,7 +18,7 @@ export interface IImage extends Document {
   aspectRatio?: string
   color?: string
   prompt?: string
-  author: string
+  author: any
   createdAt?: Date
   updateAt?: Date
 }

@@ -167,7 +167,7 @@
 
   /* =====  SHADCN OVERRIDES */
   .button {
-    @apply py-4 px-6 flex-center gap-3 rounded-full p-16-semibold focus-visible:ring-offset-0 focus-visible:ring-transparent !important;
+    @apply py-4 px-6 flex-center gap-3 rounded-md p-16-semibold focus-visible:ring-offset-0 focus-visible:ring-transparent !important;
   }
 
   .dropdown-content {
