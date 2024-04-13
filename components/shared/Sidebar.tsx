@@ -6,16 +6,16 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from '../ui/button'
+import Logo from './Logo'
+import ToggleMode from './ToggleMode'
 
 const Sidebar = () => {
   const pathname = usePathname()
 
   return (
     <aside className='hidden lg:block p-5 w-72'>
-      <Link href={'/'}>
-        <Image alt='logo' priority src={'/assets/images/logo-text.svg'} width={180} height={280} />
-      </Link>
-
+      <Logo />
+      <ToggleMode />
       <nav className='sidebar-nav'>
         <SignedIn>
           <ul className='sidebar-nav_elements'>

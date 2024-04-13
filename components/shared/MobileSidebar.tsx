@@ -6,14 +6,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from '../ui/button'
+import Logo from './Logo'
 
 const MobileSidebar = () => {
   const pathname = usePathname()
   return (
     <header className='header'>
-      <Link className='flex items-center gap-2 md:py-2' href={''}>
-        <Image priority src={'/assets/images/logo-text.svg'} alt='logo' width={180} height={280} />
-      </Link>
+      <Logo />
       <nav className='flex gap-2'>
         <SignedIn>
           <UserButton afterSignOutUrl='/' />
@@ -75,15 +74,15 @@ const MobileSidebar = () => {
                     })}
                   </ul>
                 </SignedIn>
-                <SignedOut>
-                  <Button asChild className='button bg-purple-gradient bg-cover'>
-                    <Link href={'/sign-in'}>Login</Link>
-                  </Button>
-                </SignedOut>
               </nav>
             </SheetContent>
           </Sheet>
         </SignedIn>
+        <SignedOut>
+          <Button asChild className='button bg-purple-gradient bg-cover'>
+            <Link href={'/sign-in'}>Login</Link>
+          </Button>
+        </SignedOut>
       </nav>
     </header>
   )

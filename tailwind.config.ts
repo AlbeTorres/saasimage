@@ -28,6 +28,7 @@ module.exports = {
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        auth: 'hsl(var(--auth))',
         purple: {
           100: '#F4F7FE',
           200: '#BCB6FF',
@@ -74,6 +75,8 @@ module.exports = {
         IBMPlex: ['var(--font-ibm-plex)'],
       },
       backgroundImage: {
+        'purplegardient':
+          'linear-gradient(to right, rgba(var(--purple-ligth)), rgba(var(--purple-dark)))',
         'purple-gradient': "url('/assets/images/gradient-bg.svg')",
         'banner': "url('/assets/images/banner-bg.png')",
       },
