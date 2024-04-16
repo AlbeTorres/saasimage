@@ -1,11 +1,10 @@
-'use client'
 import clsx from 'clsx'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import Link from 'next/link'
 
 const Logo = () => {
-  const { theme, setTheme } = useTheme()
+  const { theme } = useTheme()
 
   const val = theme === 'dark'
   return (
