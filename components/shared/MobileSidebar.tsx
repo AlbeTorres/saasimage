@@ -7,16 +7,17 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from '../ui/button'
 import Logo from './Logo'
+import ToggleMode from './ToggleMode'
 
 const MobileSidebar = () => {
   const pathname = usePathname()
   return (
     <header className='header'>
       <Logo />
-      <nav className='flex gap-2'>
+      <nav className='flex gap-3'>
         <SignedIn>
+          <ToggleMode />
           <UserButton afterSignOutUrl='/' />
-
           <Sheet>
             <SheetTrigger>
               <Image
@@ -27,8 +28,8 @@ const MobileSidebar = () => {
                 className='menu-pointer'
               />
             </SheetTrigger>
-            <SheetContent>
-              <Image src={'/assets/images/logo-text.svg'} alt='logo' width={152} height={23} />
+            <SheetContent className='dark:text-white'>
+              <Logo />
               <nav className='h-[95%] flex justify-between flex-col'>
                 <SignedIn>
                   <ul className='header-nav_elements'>

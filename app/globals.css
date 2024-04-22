@@ -334,7 +334,7 @@
   }
 
   .sidebar-nav_element {
-    @apply flex-center  w-full  whitespace-nowrap rounded-md bg-cover  transition-all ;
+    @apply flex-center w-full  whitespace-nowrap rounded-md bg-cover  transition-all ;
   }
 
   .sidebar-link {

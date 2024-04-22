@@ -14,7 +14,7 @@ const Sidebar = () => {
   return (
     <aside className='hidden lg:block p-5 w-72'>
       <Logo />
-      <ToggleMode />
+
       <nav className='sidebar-nav'>
         <SignedIn>
           <ul className='sidebar-nav_elements'>
@@ -68,6 +68,7 @@ const Sidebar = () => {
                 </li>
               )
             })}
+            <ToggleMode />
             <li className='flex-center gap-2 p-4 cursor-pointer'>
               <UserButton afterSignOutUrl='/' showName />
             </li>
