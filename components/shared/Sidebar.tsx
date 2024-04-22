@@ -1,5 +1,4 @@
 'use client'
-
 import { navLinks } from '@/constants'
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import Image from 'next/image'
@@ -26,8 +25,8 @@ const Sidebar = () => {
                   key={link.route}
                   className={`sidebar-nav_element group  ${
                     isActive
-                      ? 'bg-purple-gradient text-white'
-                      : ' text-gray-700 hover:text-purple-600'
+                      ? 'bg-purple-gradient dark:bg-purplegardient dark:text-slate-300 text-white'
+                      : ' text-gray-700 dark:text-slate-300 dark:hover:text-purple-600 hover:text-purple-600'
                   }`}
                 >
                   <Link className='sidebar-link' href={link.route}>
@@ -52,8 +51,8 @@ const Sidebar = () => {
                   key={link.route}
                   className={`sidebar-nav_element group  ${
                     isActive
-                      ? 'bg-purple-gradient text-white'
-                      : ' text-gray-700 hover:text-purple-600'
+                      ? 'bg-purple-gradient text-white  dark:bg-purplegardient dark:text-slate-300'
+                      : ' text-gray-700 hover:text-purple-600  dark:text-slate-300 dark:hover:text-purple-600'
                   }`}
                 >
                   <Link className='sidebar-link' href={link.route}>
@@ -75,7 +74,10 @@ const Sidebar = () => {
           </ul>
         </SignedIn>
         <SignedOut>
-          <Button asChild className='button bg-purple-gradient bg-cover'>
+          <Button
+            asChild
+            className='button bg-purple-gradient dark:bg-purplegardient dark:text-slate-300 bg-cover'
+          >
             <Link href={'/sign-in'}>Login</Link>
           </Button>
         </SignedOut>

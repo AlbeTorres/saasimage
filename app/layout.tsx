@@ -1,7 +1,6 @@
 import { ThemeProvider } from '@/components/provider/theme-provider'
 import SecureClerkProvider from '@/components/shared/SecureClerkProvider'
 import { cn } from '@/lib/utils'
-import { dark } from '@clerk/themes'
 import type { Metadata } from 'next'
 import { IBM_Plex_Sans } from 'next/font/google'
 import './globals.css'
@@ -22,8 +21,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const clerkConfig = { baseTheme: dark, variables: { colorPrimary: '#624cf5' } }
-
   return (
     <html lang='en'>
       <body className={cn('font-IBMPlex antialiased', IBMplex.variable)}>

@@ -9,7 +9,7 @@ const SecureClerkProvider = ({ children }: PropsWithChildren) => {
 
   const clerkConfig =
     theme === 'dark'
-      ? { baseTheme: dark, variables: { colorPrimary: '#624cf5' } }
+      ? { baseTheme: dark, variables: { colorPrimary: '#3f23f6' } }
       : { variables: { colorPrimary: '#624cf5' } }
   return <ClerkProvider appearance={clerkConfig}>{children}</ClerkProvider>
 }

@@ -38,7 +38,9 @@ const MobileSidebar = () => {
                         <li
                           key={link.route}
                           className={`sidebar-nav_element group  ${
-                            isActive ? 'text-purple-600' : ' text-gray-700 hover:text-purple-600'
+                            isActive
+                              ? 'text-purple-600'
+                              : ' text-gray-700 dark:text-slate-300 hover:text-purple-600'
                           }`}
                         >
                           <Link className='sidebar-link' href={link.route}>
@@ -56,7 +58,9 @@ const MobileSidebar = () => {
                         <li
                           key={link.route}
                           className={`sidebar-nav_element group  ${
-                            isActive ? 'text-purple-600' : ' text-gray-700 hover:text-purple-600'
+                            isActive
+                              ? 'text-purple-600'
+                              : ' text-gray-700 dark:text-slate-300 hover:text-purple-600'
                           }`}
                         >
                           <Link className='sidebar-link' href={link.route}>
