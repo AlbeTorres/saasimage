@@ -1,5 +1,6 @@
+import { ThemeProvider } from '@/components/provider/theme-provider'
+import SecureClerkProvider from '@/components/shared/SecureClerkProvider'
 import { cn } from '@/lib/utils'
-import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
 import { IBM_Plex_Sans } from 'next/font/google'
 import './globals.css'
@@ -11,7 +12,7 @@ const IBMplex = IBM_Plex_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'imgfy',
+  title: 'smarteditfy',
   description: 'AI-powered image creator',
 }
 
@@ -21,10 +22,17 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ClerkProvider appearance={{ variables: { colorPrimary: '#624cf5' } }}>
-      <html lang='en'>
-        <body className={cn('font-IBMPlex antialiased', IBMplex.variable)}>{children}</body>
-      </html>
-    </ClerkProvider>
+    <html lang='en'>
+      <body className={cn('font-IBMPlex antialiased', IBMplex.variable)}>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SecureClerkProvider>{children}</SecureClerkProvider>
+        </ThemeProvider>
+      </body>
+    </html>
   )
 }

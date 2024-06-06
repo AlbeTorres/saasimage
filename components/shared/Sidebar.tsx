@@ -1,20 +1,19 @@
 'use client'
-
 import { navLinks } from '@/constants'
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from '../ui/button'
+import Logo from './Logo'
+import ToggleMode from './ToggleMode'
 
 const Sidebar = () => {
   const pathname = usePathname()
 
   return (
     <aside className='hidden lg:block p-5 w-72'>
-      <Link href={'/'}>
-        <Image alt='logo' priority src={'/assets/images/logo-text.svg'} width={180} height={280} />
-      </Link>
+      <Logo />
 
       <nav className='sidebar-nav'>
         <SignedIn>
@@ -26,8 +25,8 @@ const Sidebar = () => {
                   key={link.route}
                   className={`sidebar-nav_element group  ${
                     isActive
-                      ? 'bg-purple-gradient text-white'
-                      : ' text-gray-700 hover:text-purple-600'
+                      ? 'bg-purple-gradient dark:bg-purplegardient dark:text-slate-300 text-white'
+                      : ' text-gray-700 dark:text-slate-300 dark:hover:text-purple-600 hover:text-purple-600'
                   }`}
                 >
                   <Link className='sidebar-link' href={link.route}>
@@ -52,8 +51,8 @@ const Sidebar = () => {
                   key={link.route}
                   className={`sidebar-nav_element group  ${
                     isActive
-                      ? 'bg-purple-gradient text-white'
-                      : ' text-gray-700 hover:text-purple-600'
+                      ? 'bg-purple-gradient text-white  dark:bg-purplegardient dark:text-slate-300'
+                      : ' text-gray-700 hover:text-purple-600  dark:text-slate-300 dark:hover:text-purple-600'
                   }`}
                 >
                   <Link className='sidebar-link' href={link.route}>
@@ -69,13 +68,17 @@ const Sidebar = () => {
                 </li>
               )
             })}
+            <ToggleMode />
             <li className='flex-center gap-2 p-4 cursor-pointer'>
               <UserButton afterSignOutUrl='/' showName />
             </li>
           </ul>
         </SignedIn>
         <SignedOut>
-          <Button asChild className='button bg-purple-gradient bg-cover'>
+          <Button
+            asChild
+            className='button bg-purple-gradient dark:bg-purplegardient dark:text-slate-300 bg-cover'
+          >
             <Link href={'/sign-in'}>Login</Link>
           </Button>
         </SignedOut>

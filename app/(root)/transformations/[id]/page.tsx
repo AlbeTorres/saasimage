@@ -84,7 +84,11 @@ const ImageDetails = async ({ params: { id } }: SearchParamProps) => {
 
         {userId === image.author.clerkId && (
           <div className='flex flex-col lg:flex-row gap-4 w-full justify-end'>
-            <Button asChild type='button' className='submit-button capitalize'>
+            <Button
+              asChild
+              type='button'
+              className=' bg-purple-gradient dark:bg-purplegardient dark:text-slate-300 bg-cover rounded-md py-4 px-6 p-16-semibold h-[50px] w-full md:w-fit md:h-[54px] capitalize'
+            >
               <Link href={`/transformations/${image._id}/update`}>Update Image</Link>
             </Button>
 

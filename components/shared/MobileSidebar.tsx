@@ -6,18 +6,18 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from '../ui/button'
+import Logo from './Logo'
+import ToggleMode from './ToggleMode'
 
 const MobileSidebar = () => {
   const pathname = usePathname()
   return (
     <header className='header'>
-      <Link className='flex items-center gap-2 md:py-2' href={''}>
-        <Image priority src={'/assets/images/logo-text.svg'} alt='logo' width={180} height={280} />
-      </Link>
-      <nav className='flex gap-2'>
+      <Logo />
+      <nav className='flex gap-3'>
         <SignedIn>
+          <ToggleMode />
           <UserButton afterSignOutUrl='/' />
-
           <Sheet>
             <SheetTrigger>
               <Image
@@ -28,8 +28,8 @@ const MobileSidebar = () => {
                 className='menu-pointer'
               />
             </SheetTrigger>
-            <SheetContent>
-              <Image src={'/assets/images/logo-text.svg'} alt='logo' width={152} height={23} />
+            <SheetContent className='dark:text-white'>
+              <Logo />
               <nav className='h-[95%] flex justify-between flex-col'>
                 <SignedIn>
                   <ul className='header-nav_elements'>
@@ -39,7 +39,9 @@ const MobileSidebar = () => {
                         <li
                           key={link.route}
                           className={`sidebar-nav_element group  ${
-                            isActive ? 'text-purple-600' : ' text-gray-700 hover:text-purple-600'
+                            isActive
+                              ? 'text-purple-600'
+                              : ' text-gray-700 dark:text-slate-300 hover:text-purple-600'
                           }`}
                         >
                           <Link className='sidebar-link' href={link.route}>
@@ -57,7 +59,9 @@ const MobileSidebar = () => {
                         <li
                           key={link.route}
                           className={`sidebar-nav_element group  ${
-                            isActive ? 'text-purple-600' : ' text-gray-700 hover:text-purple-600'
+                            isActive
+                              ? 'text-purple-600'
+                              : ' text-gray-700 dark:text-slate-300 hover:text-purple-600'
                           }`}
                         >
                           <Link className='sidebar-link' href={link.route}>
@@ -75,15 +79,15 @@ const MobileSidebar = () => {
                     })}
                   </ul>
                 </SignedIn>
-                <SignedOut>
-                  <Button asChild className='button bg-purple-gradient bg-cover'>
-                    <Link href={'/sign-in'}>Login</Link>
-                  </Button>
-                </SignedOut>
               </nav>
             </SheetContent>
           </Sheet>
         </SignedIn>
+        <SignedOut>
+          <Button asChild className='button bg-purple-gradient bg-cover'>
+            <Link href={'/sign-in'}>Login</Link>
+          </Button>
+        </SignedOut>
       </nav>
     </header>
   )

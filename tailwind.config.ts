@@ -28,6 +28,7 @@ module.exports = {
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        auth: 'hsl(var(--auth))',
         purple: {
           100: '#F4F7FE',
           200: '#BCB6FF',
@@ -74,6 +75,8 @@ module.exports = {
         IBMPlex: ['var(--font-ibm-plex)'],
       },
       backgroundImage: {
+        'purplegardient':
+          'linear-gradient(to right, rgba(var(--purple-ligth)), rgba(var(--purple-dark)))',
         'purple-gradient': "url('/assets/images/gradient-bg.svg')",
         'banner': "url('/assets/images/banner-bg.png')",
       },
@@ -91,10 +94,15 @@ module.exports = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
         },
+        'indeterminate-progress-bar': {
+          from: { left: '-50%' },
+          to: { left: '100%' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'indeterminate-progress-bar': 'indeterminate-progress-bar 2s infinite',
       },
     },
   },

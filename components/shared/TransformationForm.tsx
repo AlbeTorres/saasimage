@@ -303,7 +303,7 @@ const TransformationForm = ({
           <Button
             onClick={onTransformHandler}
             disabled={isTransforming || newTransformation === null || !showTransformationButton}
-            className='submit-button capitalize'
+            className=' bg-purple-gradient dark:bg-purplegardient dark:text-slate-300 bg-cover rounded-md py-4 px-6 p-16-semibold h-[50px] w-full md:w-fit md:h-[54px] capitalize'
             type='button'
           >
             {isTransforming ? 'Transforming...' : 'Apply Transformation'}
@@ -311,7 +311,7 @@ const TransformationForm = ({
 
           <Button
             disabled={isSubmitting || transformationConfig === null}
-            className='submit-button capitalize'
+            className=' bg-purple-gradient dark:bg-purplegardient dark:text-slate-300 bg-cover rounded-md py-4 px-6 p-16-semibold h-[50px] w-full md:w-fit md:h-[54px] capitalize'
             type='submit'
           >
             {isSubmitting ? 'Submitting...' : 'Save Image'}

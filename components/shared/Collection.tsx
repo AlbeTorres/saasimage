@@ -71,7 +71,7 @@ export const Collection = ({
           <PaginationContent className='flex w-full'>
             <Button
               disabled={Number(page) <= 1}
-              className='collection-btn'
+              className='button w-32 bg-purplegardient bg-cover text-white dark:text-slate-300'
               onClick={() => onPageChange('prev')}
             >
               <PaginationPrevious className='hover:bg-transparent hover:text-white' />
@@ -82,7 +82,7 @@ export const Collection = ({
             </p>
 
             <Button
-              className='button w-32 bg-purple-gradient bg-cover text-white'
+              className='button w-32 bg-purplegardient bg-cover text-white dark:text-slate-300'
               onClick={() => onPageChange('next')}
               disabled={Number(page) >= totalPages}
             >
@@ -110,7 +110,9 @@ const Card = ({ image }: { image: IImage }) => {
           sizes='(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw'
         />
         <div className='flex-between'>
-          <p className='p-20-semibold mr-3 line-clamp-1 text-dark-600'>{image.title}</p>
+          <p className='p-20-semibold mr-3 line-clamp-1 text-dark-600 dark:text-dark-400'>
+            {image.title}
+          </p>
           <Image
             src={`/assets/icons/${
               transformationTypes[image.transformationType as TransformationTypeKey].icon
